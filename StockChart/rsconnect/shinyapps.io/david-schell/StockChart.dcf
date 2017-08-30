@@ -3,8 +3,8 @@ title: StockChart
 account: david-schell
 server: shinyapps.io
 appId: 207422
-bundleId: 959802
+bundleId: 959842
 url: https://david-schell.shinyapps.io/StockChart/
-when: 1504061153.99683
+when: 1504063268.85681
 asMultiple: FALSE
 asStatic: FALSE
