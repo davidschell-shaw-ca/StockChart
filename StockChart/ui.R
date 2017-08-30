@@ -12,8 +12,8 @@ shinyUI(fluidPage(
   titlePanel("Over Sold/Bought Techncial Chart Viewer"),
   
   shinyUI(fluidPage(
-    textInput("symbol", "Enter Symbol With Extension: TSX:.T, TSXV:.V, CSE:.C", "TD.T"),
+    textInput("symbol", "Enter Symbol With Extension: TSX:.T, TSXV:.V, CSE:.C", "TD.T",width="400px"),
     
-    plotOutput("chart")
+    plotOutput("chart",width="100%",height = "800px")
   ))
 ))

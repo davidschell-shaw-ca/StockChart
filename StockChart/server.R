@@ -37,7 +37,7 @@ shinyServer(function(input, output, session) {
       #getSymbols(sym)
       #symbolData <- last(eval(parse(text = sym)),90)
       symbolData <- getChartData(sym,extension)
-      candleChart(symbolData,multi.col=TRUE,theme="white",TA="addVo();addMFI();addRSI();addCCI()")
+      chartSeries(symbolData,multi.col=TRUE,type='candles',name=sym,theme="white",TA="addBBands();addVo();addMFI();addRSI();addCCI()")
     }
   })
 })
