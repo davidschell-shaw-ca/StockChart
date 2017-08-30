@@ -15,7 +15,7 @@ shinyServer(function(input, output, session) {
   output$chart <- renderPlot({
     
     sym <- toupper(input$symbol)
-    if ((grepl(".V",sym) == TRUE) || (grepl(".T",sym) == TRUE) || (grepl(".C",sym) == TRUE))
+    if ((grepl(".V",sym,fixed=TRUE) == TRUE) || (grepl(".T",sym,fixed=TRUE) == TRUE) || (grepl(".C",sym,fixed=TRUE) == TRUE))
     {
       extension <- ""
       if (grepl(".V",sym) == TRUE)
