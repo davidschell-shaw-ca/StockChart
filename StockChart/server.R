@@ -21,17 +21,17 @@ shinyServer(function(input, output, session) {
       if (grepl(".V",sym,fixed=TRUE) == TRUE)
       {
         extension = "CVE"
-        sym <- gsub(".V","",sym)
+        sym <- sub(".V","",sym,fixed=TRUE)
       }
       else if (grepl(".T",sym,fixed=TRUE) == TRUE)
       {
         extension = "TSE"
-        sym <- gsub(".T","",sym)
+        sym <- sub(".T","",sym,fixed=TRUE)
       }
       else
       {
         extension = "CNSX"
-        sym <- gsub(".C","",sym)  
+        sym <- sub(".C","",sym,fixed=TRUE)  
       }
       #setSymbolLookup(sym='yahoo')
       #getSymbols(sym)

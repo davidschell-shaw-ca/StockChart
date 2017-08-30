@@ -10,10 +10,10 @@ library(shinycssloaders)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Over Sold/Bought Techncial Chart Viewer"),
+  titlePanel("Techncial Chart Viewer"),
   
   shinyUI(fluidPage(
-    textInput("symbol", "Enter Symbol With Extension: TSX:.T, TSXV:.V, CSE:.C", "TD.T",width="400px"),
+    textInput("symbol", "Enter Symbol With Extension: TSX = .T, TSXV = .V, CSE = .C", "TD.T",width="400px"),
     
     withSpinner(plotOutput("chart",width="100%",height = "800px"))
   ))
