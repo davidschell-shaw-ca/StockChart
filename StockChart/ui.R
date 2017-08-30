@@ -11,14 +11,9 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("Over Sold/Bought Techncial Chart Viewer"),
   
-  # Sidebar with a slider input for number of bins
-  sidebarLayout(
-    sidebarPanel(
-      textInput("symbol", "Caption", "DLS.V"),
-      verbatimTextOutput("value")),
-    # Show a plot of the generated distribution
-    mainPanel(
-      plotOutput("distPlot")
-    )
-  )
+  shinyUI(fluidPage(
+    textInput("symbol", "Enter Symbol With Extension: TSX:.T, TSXV:.V, CSE:.C", "TD.T"),
+    
+    plotOutput("chart")
+  ))
 ))
