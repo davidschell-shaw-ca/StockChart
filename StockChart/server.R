@@ -18,12 +18,12 @@ shinyServer(function(input, output, session) {
     if ((grepl(".V",sym,fixed=TRUE) == TRUE) || (grepl(".T",sym,fixed=TRUE) == TRUE) || (grepl(".C",sym,fixed=TRUE) == TRUE))
     {
       extension <- ""
-      if (grepl(".V",sym) == TRUE)
+      if (grepl(".V",sym,fixed=TRUE) == TRUE)
       {
         extension = "CVE"
         sym <- gsub(".V","",sym)
       }
-      else if (grepl(".T",sym) == TRUE)
+      else if (grepl(".T",sym,fixed=TRUE) == TRUE)
       {
         extension = "TSE"
         sym <- gsub(".T","",sym)

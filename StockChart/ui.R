@@ -5,6 +5,7 @@
 #
 
 library(shiny)
+library(shinycssloaders)
 
 shinyUI(fluidPage(
   
@@ -14,6 +15,6 @@ shinyUI(fluidPage(
   shinyUI(fluidPage(
     textInput("symbol", "Enter Symbol With Extension: TSX:.T, TSXV:.V, CSE:.C", "TD.T",width="400px"),
     
-    plotOutput("chart",width="100%",height = "800px")
+    withSpinner(plotOutput("chart",width="100%",height = "800px"))
   ))
 ))
