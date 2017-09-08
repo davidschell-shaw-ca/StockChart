@@ -8,6 +8,7 @@
 library(shiny)
 library(quantmod)
 source("GetChartData.R")
+source("SymbolObj.R")
 
 shinyServer(function(input, output, session) {
   
@@ -16,15 +17,11 @@ shinyServer(function(input, output, session) {
   })
   
   chartName <- eventReactive(input$btnChart,{
-    input$symbol
+    symbol <- getSymbol(input$symbol)
+    symbol@Title
   })
+
   output$chart <- renderPlot({
-    
-
-      #setSymbolLookup(sym='yahoo')
-      #getSymbols(sym)
-      #symbolData <- last(eval(parse(text = sym)),90)
-
       chartSeries(symbolData(),multi.col=TRUE,type='candles',name=chartName(),theme="white",TA="addBBands();addVo();addMFI();addRSI();addCCI()")
 
   })
