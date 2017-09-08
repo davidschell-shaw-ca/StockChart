@@ -1,4 +1,28 @@
-getChartData <- function(Sym, Extension){
+#getChartData <- function(Sym, Extension){
+getChartData <- function(Symbol)
+{
+  Sym <- "DLS"
+  Extension <- "V"
+  
+  sym <- toupper(Symbol)
+  if ((grepl(".V",sym,fixed=TRUE) == TRUE) || (grepl(".T",sym,fixed=TRUE) == TRUE) || (grepl(".C",sym,fixed=TRUE) == TRUE))
+  {
+    if (grepl(".V",sym,fixed=TRUE) == TRUE)
+    {
+      Extension = "CVE"
+      Sym <- sub(".V","",sym,fixed=TRUE)
+    }
+    else if (grepl(".T",sym,fixed=TRUE) == TRUE)
+    {
+      Extension = "TSE"
+      Sym <- sub(".T","",sym,fixed=TRUE)
+    }
+    else
+    {
+      Extension = "CNSX"
+      Sym <- sub(".C","",sym,fixed=TRUE)  
+    }
+  }
   
   # Construct URL
   url <- paste('https://www.google.ca/finance/historical?q=',Extension,'%3A',Sym,'&ei=_U2fWeiYJISs2AaDhKu4Bg&start=0&num=90',sep='')

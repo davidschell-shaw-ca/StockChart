@@ -11,33 +11,21 @@ source("GetChartData.R")
 
 shinyServer(function(input, output, session) {
   
+  symbolData <-  eventReactive(input$btnChart,{
+      getChartData(input$symbol)
+  })
   
+  chartName <- eventReactive(input$btnChart,{
+    input$symbol
+  })
   output$chart <- renderPlot({
     
-    sym <- toupper(input$symbol)
-    if ((grepl(".V",sym,fixed=TRUE) == TRUE) || (grepl(".T",sym,fixed=TRUE) == TRUE) || (grepl(".C",sym,fixed=TRUE) == TRUE))
-    {
-      extension <- ""
-      if (grepl(".V",sym,fixed=TRUE) == TRUE)
-      {
-        extension = "CVE"
-        sym <- sub(".V","",sym,fixed=TRUE)
-      }
-      else if (grepl(".T",sym,fixed=TRUE) == TRUE)
-      {
-        extension = "TSE"
-        sym <- sub(".T","",sym,fixed=TRUE)
-      }
-      else
-      {
-        extension = "CNSX"
-        sym <- sub(".C","",sym,fixed=TRUE)  
-      }
+
       #setSymbolLookup(sym='yahoo')
       #getSymbols(sym)
       #symbolData <- last(eval(parse(text = sym)),90)
-      symbolData <- getChartData(sym,extension)
-      chartSeries(symbolData,multi.col=TRUE,type='candles',name=sym,theme="white",TA="addBBands();addVo();addMFI();addRSI();addCCI()")
-    }
+
+      chartSeries(symbolData(),multi.col=TRUE,type='candles',name=chartName(),theme="white",TA="addBBands();addVo();addMFI();addRSI();addCCI()")
+
   })
 })

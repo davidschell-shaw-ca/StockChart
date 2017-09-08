@@ -14,7 +14,9 @@ shinyUI(fluidPage(
   
   shinyUI(fluidPage(
     textInput("symbol", "Enter Symbol With Extension: TSX = .T, TSXV = .V, CSE = .C", "TD.T",width="400px"),
+    actionButton(inputId="btnChart", label = "Chart"),
     
     withSpinner(plotOutput("chart",width="100%",height = "800px"))
+    #plotOutput("chart")
   ))
 ))
