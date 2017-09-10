@@ -6,17 +6,24 @@
 
 library(shiny)
 library(shinycssloaders)
+library(shinythemes)
 
-shinyUI(fluidPage(
+shinyUI(fluidPage(theme = shinytheme("superhero"),
   
   # Application title
   titlePanel("Techncial Chart Viewer"),
   
-  shinyUI(fluidPage(
-    textInput("symbol", "Enter Symbol With Extension: TSX = .T, TSXV = .V, CSE = .C", "TD.T",width="400px"),
-    actionButton(inputId="btnChart", label = "Chart"),
+  sidebarLayout(
     
-    withSpinner(plotOutput("chart",width="100%",height = "800px"))
+    sidebarPanel(
+    "Enter Symbol With Extension:", 
+    textInput("symbol", "TSX = .T,  TSXV = .V, CSE = .C", "TD.T",width="400px"),
+    actionButton(inputId="btnChart", label = "Chart"),
+    checkboxGroupInput(inputId = "indicators", label = "Indicators",choices =  
+                         c("Volume", "RSI", "MFI", "CCI"))),
+    
+    mainPanel(
+    
+    withSpinner(plotOutput("chart",width="100%",height = "800px"))))
     #plotOutput("chart")
-  ))
 ))
