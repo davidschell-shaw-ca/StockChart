@@ -7,6 +7,7 @@
 library(shiny)
 library(shinycssloaders)
 library(shinythemes)
+source("GetTA.R")
 
 shinyUI(fluidPage(theme = shinytheme("superhero"),
   
@@ -18,9 +19,9 @@ shinyUI(fluidPage(theme = shinytheme("superhero"),
     sidebarPanel(
     "Enter Symbol With Extension:", 
     textInput("symbol", "TSX = .T,  TSXV = .V, CSE = .C", "TD.T",width="400px"),
-    actionButton(inputId="btnChart", label = "Chart"),
+    actionButton(inputId="btnChart", label = "Display Chart"),
     checkboxGroupInput(inputId = "indicators", label = "Indicators",choices =  
-                         c("Volume", "RSI", "MFI", "CCI"))),
+                         getTAList() )),
     
     mainPanel(
     

@@ -9,6 +9,7 @@ library(shiny)
 library(quantmod)
 source("GetChartData.R")
 source("SymbolObj.R")
+source("GetTA.R")
 
 shinyServer(function(input, output, session) {
   
@@ -22,7 +23,9 @@ shinyServer(function(input, output, session) {
   })
 
   output$chart <- renderPlot({
-      chartSeries(symbolData(),multi.col=TRUE,type='candles',name=chartName(),theme="white",TA="addBBands();addVo();addMFI();addRSI();addCCI()")
-
+      #chartSeries(symbolData(),multi.col=TRUE,type='candles',name=chartName(),theme="white",TA="addBBands();addVo();addMFI();addRSI();addCCI()")
+    chartSeries(symbolData(),multi.col=TRUE,type='candles',name=chartName(),theme="white",TA=getTA(input$indicators))
+    
   })
 })
+
