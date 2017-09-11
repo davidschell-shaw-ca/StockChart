@@ -23,9 +23,29 @@ shinyServer(function(input, output, session) {
   })
 
   output$chart <- renderPlot({
-      #chartSeries(symbolData(),multi.col=TRUE,type='candles',name=chartName(),theme="white",TA="addBBands();addVo();addMFI();addRSI();addCCI()")
-    chartSeries(symbolData(),multi.col=TRUE,type='candles',name=chartName(),theme="white",TA=getTA(input$indicators))
-    
+
+    # Convert to time series and daily OHLC object
+    theData <- symbolData()
+    data_xts <- as.xts(theData[,-1],order.by=as.POSIXct(theData$Date))
+    chartSeries(to.daily(data_xts),multi.col=TRUE,type='candles',name=chartName(),theme="white",TA=getTA(input$indicators))
   })
+  
+  output$table <- renderTable({
+    symbolData()
+  })
+  
+  # Output Summary
+  output$companyName <- renderText({
+    paste('Company:', chartName())
+  })
+  output$sharesOS <- renderText({
+    paste('Shares Outstanding:', "23,233,232")
+  })
+  output$averageDailyVolume <- renderText({
+    paste('Average Daily Volume:',"233,020")
+  })
+  
+  
+    
 })
 

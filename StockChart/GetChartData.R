@@ -1,4 +1,3 @@
-#getChartData <- function(Sym, Extension){
 getChartData <- function(Symbol)
 {
   Sym <- "DLS"
@@ -55,7 +54,7 @@ getChartData <- function(Symbol)
   dmatches = mapply(getexpr,dateVector,dgg)
   dresult = as.Date(gsub(dPattern,'\\1',dmatches),"%b %d, %Y")
   names(dresult) = NULL
-  dData = as.data.frame(dresult)
+  dData = as.data.frame(format(dresult,'%Y-%m-%d'))
   names(dData) = c('Date')
   
   # Extract Numeric Real Data
@@ -80,10 +79,6 @@ getChartData <- function(Symbol)
   
   # Create data frame to combine all data into specific structure Date, OHLC, Volume
   all_df <- data.frame(dData,nData,lData)
-  
-  # Convert to time series and daily OHLC object
-  data_xts <- as.xts(all_df[,-1],order.by=as.POSIXct(all_df$Date))
-  to.daily(data_xts)
-  
+
 }
 
