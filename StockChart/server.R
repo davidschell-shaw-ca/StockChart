@@ -13,6 +13,12 @@ source("GetTA.R")
 
 shinyServer(function(input, output, session) {
   
+  output$UserId <- renderText({Sys.getenv("USERNAME")})
+  
+  output$`CSEList` <- renderTable({
+    read.csv('data/cse.csv')
+  })
+  
   symbolData <-  eventReactive(input$btnChart,{
       getChartData(input$symbol)
   })

@@ -13,6 +13,8 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   
   # Application title
   titlePanel("Techncial Chart Viewer"),
+  verbatimTextOutput("UserId"),
+
   
   navbarPage("Menu:",
     tabPanel("Home",
@@ -41,7 +43,9 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
         )
       )
     ),
-    tabPanel("Daily List"),
+    tabPanel("Daily List",
+             tableOutput("CSEList")
+             ),
     tabPanel("Disclaimer",
              tags$p(),
              titlePanel("This website and the information contained herein is not intended to be a source of advice or creditable analysis. The website is for the sole purpose of demonstrating the capabilities of R Shiny applications.")
