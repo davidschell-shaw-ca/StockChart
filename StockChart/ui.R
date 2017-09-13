@@ -7,6 +7,8 @@
 library(shiny)
 library(shinycssloaders)
 library(shinythemes)
+library(shinydashboard)
+
 source("GetTA.R")
 
 shinyUI(fluidPage(theme = shinytheme("cerulean"),
@@ -45,7 +47,17 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
     ),
     tabPanel("Daily List",
              tableOutput("CSEList")
-             ),
+    ),
+    tabPanel("Edit List",
+             dashboardPage(dashboardHeader(disable = T),
+                           dashboardSidebar(disable = T),
+                           dashboardBody(uiOutput("MainBody")
+                           )
+             )
+                 
+
+             
+    ),
     tabPanel("Disclaimer",
              tags$p(),
              titlePanel("This website and the information contained herein is not intended to be a source of advice or creditable analysis. The website is for the sole purpose of demonstrating the capabilities of R Shiny applications.")
