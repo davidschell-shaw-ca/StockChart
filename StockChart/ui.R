@@ -46,6 +46,7 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
       )
     ),
     tabPanel("Daily List",
+             actionButton(inputId="btnRefresh",label="Refresh"),
              tableOutput("CSEList")
     ),
     tabPanel("Edit List",

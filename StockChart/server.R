@@ -17,8 +17,11 @@ shinyServer(function(input, output, session) {
   
   output$UserId <- renderText({Sys.getenv("USERNAME")})
   
+  
+  
   output$CSEList <- renderTable({
-    read.csv('/data/cse.csv')
+    #read.csv('/data/cse.csv')
+    symbolList()
   })
   
   symbolData <-  eventReactive(input$btnChart,{
@@ -30,6 +33,10 @@ shinyServer(function(input, output, session) {
     symbol@Title
   })
 
+  symbolList <- eventReactive(input$btnRefresh,{
+    readRDS('data/symbols.rds')
+  })
+  
   output$chart <- renderPlot({
 
     # Convert to time series and daily OHLC object
@@ -58,10 +65,11 @@ shinyServer(function(input, output, session) {
   
   vals<-reactiveValues()
   vals$Data<-data.table(
-    Symbol = c('FAT.C','GRO.V','DLS.V'), 
-    CompanyName = c('Far Resources','Grow UP','Dealnet'),
-    LastPrice=c(.23,.105,.165),
-    Active=c(FALSE,TRUE,TRUE)
+    #Symbol = c('FAT.C','GRO.V','DLS.V'), 
+    #CompanyName = c('Far Resources','Grow UP','Dealnet'),
+    #LastPrice=c(.23,.105,.165),
+    #Active=c(FALSE,TRUE,TRUE)
+    readRDS('data/symbols.rds')
   )
   
   output$MainBody<-renderUI({
@@ -115,10 +123,8 @@ shinyServer(function(input, output, session) {
       )
   
   observeEvent(input$Save,{
-    x <- vals$Data
-    saveRDS(x,"data/symbols.rds")  
-
-    head(x)
+    saveRDS(vals$Data,"data/symbols.rds")  
+    symbolList <- vals$Data
   })
   
   observeEvent(input$Add_row_head,{
