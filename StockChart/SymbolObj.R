@@ -1,26 +1,30 @@
-setClass(Class="SymbolObj",representation(Symbol="character",Extension="character",FQS="character", Company="character", Title="character"))
+setClass(Class="SymbolObj",representation(Symbol="character",Extension="character",FQS="character", Company="character", Title="character", ExchangeId="numeric"))
 
-getSymbol <- function(Symbol)
+getSymbolMetaData <- function(Symbol)
 {
   sym <- Symbol
   extension <- ''
   company <- ''
+  exchangeId <- 1
   
   symbol <- toupper(Symbol)
   if ((grepl(".V",symbol,fixed=TRUE) == TRUE) || (grepl(".T",symbol,fixed=TRUE) == TRUE) || (grepl(".C",symbol,fixed=TRUE) == TRUE))
   {
     if (grepl(".V",symbol,fixed=TRUE) == TRUE)
     {
+      exchangeId = 2
       extension = "CVE"
       sym <- sub(".V","",symbol,fixed=TRUE)
     }
     else if (grepl(".T",symbol,fixed=TRUE) == TRUE)
     {
+      exchangeId = 1
       extension = "TSE"
       sym <- sub(".T","",symbol,fixed=TRUE)
     }
     else
     {
+      exchangeId = 3  
       extension = "CNSX"
       sym <- sub(".C","",symbol,fixed=TRUE)  
     }
@@ -47,5 +51,5 @@ getSymbol <- function(Symbol)
   
   fqs <- paste(sym,":",extension,sep='')
   title <- paste(company,' (', fqs, ')',sep='')
-  new("SymbolObj", Symbol=sym,Extension=extension,FQS=fqs,Company=company,Title=title)
+  new("SymbolObj", Symbol=sym,Extension=extension,FQS=fqs,Company=company,Title=title,ExchangeId=exchangeId)
 }

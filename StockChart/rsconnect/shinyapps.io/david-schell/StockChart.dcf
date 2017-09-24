@@ -5,8 +5,8 @@ account: david-schell
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 207422
-bundleId: 975932
+bundleId: 995131
 url: https://david-schell.shinyapps.io/StockChart/
-when: 1505103575.73531
+when: 1506293675.53401
 asMultiple: FALSE
 asStatic: FALSE
